@@ -1,0 +1,83 @@
+* {
+    padding: 0;
+    margin: 0;
+    background-color: #ffff;
+}
+
+
+
+.leaflet-marker-icon, .leaflet-marker-shadow {
+    display: none;
+}
+.leaflet-marker-pane{
+ display: none!important;
+}
+.marker-shadow {
+    display: none!important;
+}
+.leaflet-control-attribution .leaflet-control {
+    display: none!important;
+}
+
+.leaflet-container a {
+    display: none;
+}
+
+.containerG {
+    width: 100%;
+    
+    /*max-width:1366px;*/
+    padding: 0;
+    min-width: 302px;
+    min-height: 333px;
+   
+    margin-bottom: 2%;
+}
+
+.mapaPro {
+    width: 100%;
+    min-height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sessaoOne {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 200px;
+    flex-wrap: wrap;
+
+}
+
+#map {
+    width: 80%;
+    height: 1000px;
+    background: none;
+    z-index: 3;
+}
+
+.card {
+    background-color: cornflowerblue;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    margin: 2px 5px;
+}
+
+.mapa {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/*
+
+ +++ THIS IS THE IMPORTANT PART +++*/
+
+.leaflet-container path {
+    transition: fill .75s;
+}
