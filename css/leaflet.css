@@ -277,7 +277,7 @@
 .leaflet-bar a,
 .leaflet-bar a:hover {
 	background-color: #fff;
-	border-bottom: 1px solid #ccc;
+	border-bottom: 1px solid rgb(204, 204, 204);
 	width: 26px;
 	height: 26px;
 	line-height: 26px;
@@ -341,8 +341,8 @@
 /* layers control */
 
 .leaflet-control-layers {
-	box-shadow: 0 1px 5px rgba(0,0,0,0.4);
-	background: #fff;
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+	background: rgb(255, 255, 255);
 	border-radius: 5px;
 	}
 .leaflet-control-layers-toggle {
@@ -386,7 +386,7 @@
 	}
 .leaflet-control-layers-separator {
 	height: 0;
-	border-top: 1px solid #ddd;
+	border-top: 1px solid rgb(221, 221, 221);
 	margin: 5px -10px 5px -6px;
 	
 	}
@@ -525,11 +525,11 @@
 	background: transparent;
 	}
 .leaflet-container a.leaflet-popup-close-button:hover {
-	color: #999;
+	color: rgb(153, 153, 153);
 	}
 .leaflet-popup-scrolled {
 	overflow: auto;
-	border-bottom: 1px solid #ddd;
+	border-bottom: 1px solid rgb(221, 221, 221);
 	border-top: 1px solid #ddd;
 	}
 
