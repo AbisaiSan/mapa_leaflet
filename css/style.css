@@ -2,9 +2,14 @@
     padding: 0;
     margin: 0;
     background-color: #ffff;
+    font-size: 300;
 }
 
+ul, li{
+    list-style: none;
+}
 
+/*Alterações na classe leaflet*/
 
 .leaflet-marker-icon, .leaflet-marker-shadow {
     display: none;
@@ -23,6 +28,7 @@
     display: none;
 }
 
+/*container geral*/
 .containerG {
     width: 100%;
     
@@ -34,43 +40,97 @@
     margin-bottom: 2%;
 }
 
-.mapaPro {
-    width: 100%;
-    min-height: 500px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.sessaoOne {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin: 0 200px;
-    flex-wrap: wrap;
-
-}
-
+/*Estilo principal do mapa*/
 #map {
     width: 80%;
-    height: 1000px;
+    height: 950px;
     background: none;
     z-index: 3;
 }
 
-.card {
-    background-color: cornflowerblue;
-    width: auto;
-    height: auto;
-    padding: 10px;
-    margin: 2px 5px;
+.mapaPro {
+    width: 100%;
+    min-height: 500px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
 }
 
-.mapa {
+/*Sessão de dados exibidos (Municipio, eixo, todal de progrmas e projetos*/
+
+.sessaoDados {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.nomeMunicipio {
+    text-align: left;
+    font-size: 2em;
+    line-height: 1.6em;
+    font-weight: 700;
+    color: black;
+}
+
+.nomeMunicipio h3{
+    border-bottom: 1px solid gold;
+    margin-bottom: 30px; 
+    font-weight: bold; 
+    color: gold;
+}
+
+.listEixos h4{
+    margin-top: 15px;
+    text-align: left;
+    font-size: 1.8em;
+    line-height: 1.4em;
+    font-weight: 500;
+    color: black;
+    border-bottom: 2px solid #ffca28;
+}
+
+.listEixos p{
+    padding: 5px 0;
+    text-align: left;
+    font-size: 1.2em;
+    line-height: 1.2em;
+    font-weight: 500;
+    color: black;
+    
+}
+
+.totalProgrmas span{
+    margin-top: 10px;
+    text-align: left;
+    font-size: 1.5em;
+    line-height: 1.8em;
+    font-weight: 500;
+    color: black;
+    border-bottom: 2px solid #ffca28;
+}
+
+.botao{
+    cursor: pointer;
+    text-align: center;
+    width: 80px;
+    height: auto;
+    padding: 10px;
+    background-color: #c62828;
+    border-radius: 7px;
+    color: #ffff;
+    border:1px solid #ffff;
+}
+.botao:hover{
+    border:1px solid #c62828;
+    background-color: #ffff;
+    color: #c62828;
+}
+.mapa {
+    display: flex;
+    justify-content: left;
+    align-items:center;
 }
 
 
