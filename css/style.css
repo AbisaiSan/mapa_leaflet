@@ -58,15 +58,15 @@ ul, li{
 
 /*Sessão de dados exibidos (Municipio, eixo, todal de progrmas e projetos*/
 
-.sessaoDados {
+/* .sessaoDados {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     flex-wrap: wrap;
-}
+} */
 
-.nomeMunicipio {
+/* .nomeMunicipio {
     text-align: left;
     font-size: 2em;
     line-height: 1.6em;
@@ -79,7 +79,7 @@ ul, li{
     margin-bottom: 30px; 
     font-weight: bold; 
     color: gold;
-}
+} */
 
 .listEixos h4{
     margin-top: 15px;
@@ -112,9 +112,10 @@ ul, li{
 }
 
 .botao{
+   
     cursor: pointer;
     text-align: center;
-    width: 80px;
+    width: 100px;
     height: auto;
     padding: 10px;
     background-color: #c62828;
@@ -127,6 +128,7 @@ ul, li{
     background-color: #ffff;
     color: #c62828;
 }
+
 .mapa {
     display: flex;
     justify-content: left;

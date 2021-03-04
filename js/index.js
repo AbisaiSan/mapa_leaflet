@@ -22,6 +22,7 @@ var map = new L.Map('map', {
 		})
 		.then(function (data)  {
 		L.geoJSON(data).addTo(map);
+		
 
 	//
 	// Adicionando o nome da cidade para exibir ao lado
@@ -45,7 +46,7 @@ async function getEixos() {
 
 getEixos()
 
-/*Listando eixos e jogando no front*/
+/*Listando eixos e jogando no*/
 function show1(eixos) {
     
     let lista_eixos = ''
@@ -76,7 +77,8 @@ function show1(eixos) {
 
 		onEachFeature: function (feature, layer) {
 		layer.on("mouseover", function (e) {
-
+		
+		
 		getDados(feature, layer);
 
 		addTextoDiv(feature.properties.name);

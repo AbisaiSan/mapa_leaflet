@@ -17,94 +17,93 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-   
-    
+
+
     <title>Document</title>
 </head>
 
 <body>
-    
+
     <div class="rowfuid" id="secao1">
 
         <div class="container">
-    
+
             <div class="row">
                 <div class="col-md-12">
-                    <h3 style="text-transform: uppercase; text-align: center; color: #ffffff; font-weight: bold;">Painel de Indicadores</h3>
-                    <h5 style="text-align: center; color: #ffffff;"><i class="fas fa-question-circle"></i> Clique no município desejado para<br> mais informações ou utilize os menus</h5>
+                    <h3 style="text-transform: uppercase; text-align: center; color: black; font-weight: bold;">Painel
+                        de Indicadores</h3>
+                    <h5 style="text-align: center; color: black;"><i class="fas fa-question-circle"></i> Clique no
+                        município desejado para<br> mais informações ou utilize os menus</h5>
                 </div>
+
                 
-    
-                <div class="col-md-7" style="margin-bottom: 50px;">
-                    <!--mapa-->
+                <div class="col-md-8" style="margin-bottom: 50px;">
                     <div class="mapa" id="map"></div>
-                    <!--mapa-->
+                </div>
+
+                <div class="col-3 col-indicadores">
+                    <div class="row">
+
+                        <div class="col-md-12" id="nomeMunicipio">
+                            <h3 class="nomeMunicipio"
+                                style="border-bottom: 1px solid gold;margin-bottom: 30px; font-weight: bold; color: gold;">
+                                São Luis</h3>
+                        </div>
+
+                        <div class=" detalhe-indicadores listEixos">
+                            <h4><i class="fas fa-chart-bar"></i>Eixos</h4>
+                            <div id="listEixos"></div>
+                            <!--PROGRAMAS-->
+                            <h4><i class="fas fa-chart-pie"></i>Total de Programas</h4>
+                            <p>175</p>
+                        </div>
+                        <div class="botao">Saiba mais</div>
+                    </div>
+
                 </div>
                 
-                <div class="col-md-5 col-indicadores">
-                    <div class="row">
-                    
-                    
-                    <div class="col-md-12" id="nomeMunicipio">
-                        <h3 class="nomeMunicipio" style="border-bottom: 1px solid gold;margin-bottom: 30px; font-weight: bold; color: gold;">São Luis</h3>
-                    </div>
-                    
-                        <div id="listEixos" class="col-md-6 detalhe-indicadores listEixos">
-                            <h4><i class="fas fa-chart-bar"></i>Eixos</h4>
-                            
-                        </div>
-
-                        <div class="col-md-6 detalhe-indicadores">
-                            <h4><i class="fas fa-chart-pie"></i>Total de Programas</h4>
-                            <p>1268,00</p>
-                        </div>
-
-                    </div>
-    
-                </div>
-    
             </div>
-    
+            
         </div>
-    
+        
     </div>
-    
+
 
     <!-- <div class="containerG">
-        <div>
-            <h1 style="text-align: center;padding-top: 5px; padding-bottom: -50px;">Conheça mais sobre o PROMUNICIPIOS
-            </h1>
-        </div>
-        <div class="mapaPro">
-           
-            <div class="mapa" id="map"></div>
-            
-            <div class="sessaoDados">
-                <div class="marker-position">
-                    <h2 class="nomeMunicipio borda">São Luis</h2>
-                </div>
-                <div id="listEixos" class="listEixos">
-                    <ul>
-                        <li>Educação</li>
-                        <li>Saúde</li>
-                        <li>Segurança Pública</li>
-                        <li>Esporte e lazer</li>
-                    </ul>
-                </div>
-                <div class="totalProgrmas">
-                    <span class="TotalPro">Total de  Programas: 2.051.00</span>
-                </div>
-                <div class="totalProgrmas">
-                    <span class="TotalPro">Total de Projetos: 4.216.00</span>
-                </div>
-                <div class="botao">Saiba mais</div>
-            </div>
-        </div>
-    </div> -->
+<div>
+<h1 style="text-align: center;padding-top: 5px; padding-bottom: -50px;">Conheça mais sobre o PROMUNICIPIOS
+</h1>
+</div>
+<div class="mapaPro">
+
+<div class="mapa" id="map"></div>
+
+<div class="sessaoDados">
+<div class="marker-position">
+<h2 class="nomeMunicipio borda">São Luis</h2>
+</div>
+<div id="listEixos" class="listEixos">
+<ul>
+<li>Educação</li>
+<li>Saúde</li>
+<li>Segurança Pública</li>
+<li>Esporte e lazer</li>
+</ul>
+</div>
+<div class="totalProgrmas">
+<span class="TotalPro">Total de  Programas: 2.051.00</span>
+</div>
+<div class="totalProgrmas">
+<span class="TotalPro">Total de Projetos: 4.216.00</span>
+</div>
+<div class="botao">Saiba mais</div>
+</div>
+</div>
+</div> -->
 
     <script src="/js/leaflet.ajax.min.js"></script>
     <script src="/js/index.js"></script>
-    
+
 </body>
 
 </html>
