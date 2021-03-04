@@ -1,7 +1,7 @@
 * {
     padding: 0;
     margin: 0;
-    background-color: #ffff;
+   
     font-size: 300;
 }
 
@@ -56,17 +56,7 @@ ul, li{
     align-items: center;
 }
 
-/*Sessão de dados exibidos (Municipio, eixo, todal de progrmas e projetos*/
-
-/* .sessaoDados {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    flex-wrap: wrap;
-} */
-
-/* .nomeMunicipio {
+.nomeMunicipio {
     text-align: left;
     font-size: 2em;
     line-height: 1.6em;
@@ -75,11 +65,10 @@ ul, li{
 }
 
 .nomeMunicipio h3{
+    width:300px ;
     border-bottom: 1px solid gold;
     margin-bottom: 30px; 
-    font-weight: bold; 
-    color: gold;
-} */
+}
 
 .listEixos h4{
     margin-top: 15px;
@@ -135,7 +124,48 @@ ul, li{
     align-items:center;
 }
 
+/*PAGINA QUE EXIBE DADOS DO MUNICIPIO SELECIONADO*/
 
+.containerGeral{
+    width: 90%;
+    max-width: 980px;
+    margin: auto;
+}
+
+.containerBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.municipioDados h3{
+    margin-top: 2%;
+    text-align: left;
+    font-size: 1.5em;
+    line-height: 1.6em;
+    font-weight: 700;
+    color: black;
+    border-bottom: 3px solid #db4a52;
+}
+
+.mapSessao{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 150px;
+    padding: 60px 0;
+}
+
+.selectEixoPrograma{
+    margin-top: -370px;
+}
+
+
+.tituloTabela{
+    width: 170px;
+    text-align: center;
+}
+ 
 /*
 
  +++ THIS IS THE IMPORTANT PART +++*/
