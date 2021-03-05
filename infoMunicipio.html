@@ -16,101 +16,145 @@
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" 
      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 
+     <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <title>Document</title>
    
     <style>
          #mapid {
             border-radius: 5px;
-            width: 650px;
-            height: 500px;
+            width: 70%;
+            height: 410px;
         }
     </style>
 </head>
 <body>
-    <main>
-        <section class="containerGeral">
-            <div class="containerBox">
-                <div class="nomeMunicipio municipioDados">
-                    <h3><i style="color: black;" class="fas fa-city"></i> São Luis</h3>
-                </div>
-            </div>
-            <h2 style=" font-weight: 700;" ><i style="color: #db4a52;" class="fas fa-map-marked-alt"></i> Mapa</h2>
-            <div class="mapSessao">
-               
-                
-                <div id="mapid"></div>
-                <div class="selectEixoPrograma">
-                    <select style="width: 500px;" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                        <option selected>Selecione um Eixo...</option>
-                        <div id="listEixos"></div>
-                        <option value="1">EDUCAÇÃO E CULTURA</option>
-                        <option value="2">Saúde</option>
-                        <option value="3">Segurança Pública</option>
-                        <option value="3">ESPORTE E LAZER</option>
-                        
-                    </select>
-                    <!--Programas-->
-                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                        <option selected>Selecione um Programa...</option>
-                        <div id="listEixos"></div>
-                        <option value="1">Bolsa Escola</option>
-                        <option value="2">Centros Especializados de Assistência Social (CREAS)</option>
-                        <option value="3">Escola Digna</option>
-                    </select>
-                </div>
-            </div>
-            <div class="dadosPrograma">
-                <h2 style="padding: 15px 0;"> <i style="color: #db4a52;" class="fas fa-project-diagram"></i> Informações Sobre o Programa</h2>
-                
-                <table class="table table-bordered border-2 table-responsive-lg border-danger">
-                    <thead>
-                        <tr>
-                          <th class="tituloTabela" scope="col">Programa</th>
-                          <th class="tituloTabela" scope="col-4">Data de inicio</th>
-                          <th class="tituloTabela" scope="col">Total de beneficiados</th>
-                          <th class="tituloTabela" scope="col">Descrição</th>
-                          
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td scope="row">Escola Digna</td>
-                          <td >2017-08-04</td>
-                          <td>4.841</td>
-                          <td>O Programa Escola Digna tem por finalidade desenvolver 
-                            uma série de ações com o objetivo de aprimorar e transformar
-                             o processo de ensino/aprendizagem na Educação Básica, elevando
-                              os índices educacionais do Maranhão. Como metas do programa 
-                              destacam-se: garantir infraestrutura física de qualidade nas 
-                              escolas em substituição aos espaços inadequados existentes, 
-                              bem como assessorar os municípios no processo de ensino e 
-                              aprendizagem na perspectiva de melhorar os indicadores de 
-                              escolaridade, com capacitação para os professores, dentre 
-                              outras ações.</td>
-                        </tr>
-                        <tr>
-                            <td scope="row">PreUNI – Aulões do ENEM</td>
-                            <td >2016-05-06</td>
-                            <td>25.456</td>
-                            <td>Os Aulões têm como objetivo fortalecer os 
-                                conhecimentos e habilidades das pessoas 
-                                interessadas em ingressar no Ensino Superior, 
-                                focado nos conteúdos do Exame Nacional de Ensino 
-                                Médio (ENEM). Os Aulões consistem em mega revisões 
-                                com material didático gratuito para estudantes em 
-                                preparação para o ENEM, embora o foco das revisões 
-                                sejam estudantes da rede pública, os Aulões são abertos 
-                                ao público em geral: jovens, adultos, indígenas e quilombolas.</td>
-                          </tr>
-                      </tbody>
-                </table>
-               
-            </div>
-        </section>
-    </main>
+    <!--HEADER-->
+    <header>
+        <nav style="display: flex;">
+            <ul style="display: flex;">
+                <li>ADMIN</li>
+                <li>ADMIN</li>
+                <li>ADMIN</li>
+            </ul>
+        </nav>
+    </header>
 
+    <main class="containerGeral">
+        <section style="margin-top: 2%;">
+
+            <div class="container">
+                <div style="display: flex; gap: 190px;"  >
+                        <div class="col-4">
+                            <div class="card municipioHead ">
+                                <div class="card-body">
+                                    <div class="municipioTitle">
+                                        <img src="/img/noun_City_481957.svg" alt="">
+                                        <h5 class="card-title nameMunicipio">São Luis</h5>
+                                    </div>
+                                
+                                    
+                                        <div class="seleEixoProg">
+
+                                            <select  class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                                <option selected>Selecione um Eixo...</option>
+                                                <div id="listEixos"></div>
+                                                <option value="1">EDUCAÇÃO E CULTURA</option>
+                                                <option value="2">Saúde</option>
+                                                <option value="3">Segurança Pública</option>
+                                                <option value="3">ESPORTE E LAZER</option>
+                                            
+                                            </select>
+                                            
+                                            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                                <option selected>Selecione um Programa...</option>
+                                                <div id="listEixos"></div>
+                                                <option value="1">Bolsa Escola</option>
+                                                <option value="2">Centros Especializados de Assistência Social (CREAS)</option>
+                                                <option value="3">Escola Digna</option>
+                                            </select>
+
+                                        </div>
+                                    
+                                    <div class="cardFooter"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <div id="mapid"></div>
+                        </div>
+                  </div>
+            </div>
+            
+        </section>
+    
+
+    <section style="margin-top: 4%;">
+        <div class="container">
+            <div class="dadosRelatorio">
+                <div class="municipioTitle municipioHead">
+                    <img src="/img/noun_programming_1214182.svg" alt="">
+                    <h2>Informações Sobre o Programa</h2>
+                </div>
+            </div>
+
+            <div class="dadosRelatorioPrograma">
+                <div class="TDadosPrograma">
+                    <ul>
+                        <li>Programa</li>
+                        <li>Data de inicio</li>
+                        <li>N° Beneficiados</li>
+                        <li>Ações</li>
+                    </ul>
+                </div>
+                
+
+                <div class="cardDadosPrograma">
+                    <ul>
+                        <li>Escola Digna </li>
+                        <li> 2017-08-04 </li>
+                        <li> 4.841</li>
+                        <li title="Clique aqui para baixar"><i style="font-size: 30px;" class="far fa-file-pdf"></i></li>
+                        <li title="Clique aqui para baixar"><i style="font-size: 30px;" class="far fa-file-excel"></i></li>
+                    </ul>
+                </div>
+
+                <div class="descricaoPrograma">
+                    <h3>Descrição do programa</h3>
+                    <p>O Programa Escola Digna tem por finalidade desenvolver uma série de ações com o 
+                        objetivo de aprimorar e transformar o processo de ensino/aprendizagem na Educação 
+                        Básica, elevando os índices educacionais do Maranhão. Como metas do programa destacam-se: 
+                        garantir infraestrutura física de qualidade nas escolas em substituição aos espaços inadequados 
+                        existentes, bem como assessorar os municípios no processo de ensino e aprendizagem na perspectiva 
+                        de melhorar os indicadores de escolaridade, com capacitação para os professores, dentre outras ações.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
     <script src="/mapaInfoMunicipio.js"></script>
     <script src="/js/index.js"></script>
+
+<!-- <div class="selectEixoPrograma">
+<select style="width: 500px;" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+    <option selected>Selecione um Eixo...</option>
+    <div id="listEixos"></div>
+    <option value="1">EDUCAÇÃO E CULTURA</option>
+    <option value="2">Saúde</option>
+    <option value="3">Segurança Pública</option>
+    <option value="3">ESPORTE E LAZER</option>
+
+</select>
+
+<select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+    <option selected>Selecione um Programa...</option>
+    <div id="listEixos"></div>
+    <option value="1">Bolsa Escola</option>
+    <option value="2">Centros Especializados de Assistência Social (CREAS)</option>
+    <option value="3">Escola Digna</option>
+</select>
+</div> -->
 </body>
 </html>
