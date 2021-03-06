@@ -12,11 +12,29 @@ var map = new L.Map('map', {
 
 let listaDeEixos = [];
 
+const listaDeMunicipios = fetch('http://api.homologacao.promunicipios.ma.gov.br/api/municipio')
+    .then(data => data.json());
+
 let municipioSelecionado = {
     "existe": false,
     "nome": "",
     "id": ""
 };
+
+const selecionarMunicipio = (municipioId) => {
+    document.querySelector("#botaoSaibaMais").href = `/infoMunicipio.html?municipio=${municipioId}`;
+    qtdProgramasPorMunicipioId(municipioId);
+}
+
+const programasUnicos = [];
+const qtdProgramasPorMunicipioId = (municipioId) => fetch(`http://api.homologacao.promunicipios.ma.gov.br/api/projeto/municipio/${municipioId}`)
+    .then(data => data.json())
+    .then(projetos => projetos.map(proj => proj.programa).forEach(prog => {
+        if (!programasUnicos.some(pU => pU.id == prog.id)) programasUnicos.push(prog);
+    }))
+    .then(_ => {
+        document.querySelector("#qtdProgramas").innerHTML = `${programasUnicos.length}`;
+    });
 
 function carregaEixoPorMunicipioNome(nomeMunicipio) {
     fetch('http://api.homologacao.promunicipios.ma.gov.br/api/municipio/nome/' + nomeMunicipio)
@@ -29,15 +47,15 @@ function getProjetosByMunicipioId(id) {
         .then(data => data.json())
         .then(data => {
             listaDeProgramasParaEixos(data).forEach(eixo => {
-                console.log(eixo);
-                eixoMock = {
-                    "id": eixo["id"],
-                    "nome": eixo["nome"],
-                    "textoPublico": eixo["textoPublico"]
-                };
-                if (!listaDeEixos.includes(eixoMock)) listaDeEixos.push(eixoMock);
-            })
-            console.log(listaDeEixos);
+                    //console.log(eixo);
+                    eixoMock = {
+                        "id": eixo["id"],
+                        "nome": eixo["nome"],
+                        "textoPublico": eixo["textoPublico"]
+                    };
+                    if (!listaDeEixos.includes(eixoMock)) listaDeEixos.push(eixoMock);
+                })
+                //console.log(listaDeEixos);
         });
 }
 
@@ -80,7 +98,7 @@ function loadDadosMunicipios() {
 
                 let lista_eixos = ''
                 for (let eixo of eixos) {
-                    lista_eixos += `<p>${eixo.nome}</p>`
+                    lista_eixos += `<p > <a href="infoMunicipio.html?eixo=${eixo.id}&municipio=186"> ${eixo.nome}</a></p>`
                 }
                 document.querySelector('#listEixos').innerHTML = lista_eixos
             }
@@ -121,8 +139,8 @@ function loadDadosMunicipios() {
                                         color: "#ffea00",
                                         fillOpacity: 1
                                     });
-                                    if (municipioSelecionado.nome != feature.properties.name)
-                                        addTextoDiv(feature.properties.name);
+                                    // if (municipioSelecionado.nome != feature.properties.name)
+                                    //     addTextoDiv(feature.properties.name);
                                 }
                             });
 
@@ -147,21 +165,25 @@ function loadDadosMunicipios() {
                                         municipioSelecionado.existe = false;
                                         municipioSelecionado.nome = "";
                                         municipioSelecionado.id = "";
-                                    } else {
-                                        //remover a seleção da feature
-                                        municipioSelecionado.nome = feature.properties.name;
-                                        addTextoDiv(feature.properties.name);
-                                        municipioSelecionado.id = feature.properties.id;
-                                        carregaEixoPorMunicipioNome(feature.properties.name);
                                     }
+                                    /*else {
+                                                                           //remover a seleção da feature
+                                                                           municipioSelecionado.nome = feature.properties.name;
+                                                                           addTextoDiv(feature.properties.name);
+                                                                           municipioSelecionado.id = feature.properties.id;
+                                                                           carregaEixoPorMunicipioNome(feature.properties.name);
+                                                                       }*/
                                 } else {
                                     municipioSelecionado.existe = true;
                                     municipioSelecionado.nome = feature.properties.name;
                                     municipioSelecionado.id = feature.properties.id;
                                     carregaEixoPorMunicipioNome(feature.properties.name);
-                                }
 
-                                console.log(municipioSelecionado);
+                                    addTextoDiv(feature.properties.name);
+                                    listaDeMunicipios
+                                        .then(munLista => munLista.filter(mun => mun.nome == feature.properties.name)[0].id)
+                                        .then(mId => selecionarMunicipio(mId));
+                                }
 
                                 //adding the province name to the visible div
                                 //addTextoDiv(feature.properties.name);

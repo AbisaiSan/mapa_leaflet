@@ -2,6 +2,7 @@
     padding: 0;
     margin: 0;
     font-family: 'Roboto Condensed', sans-serif;
+    /*background-color: #edf0f5;*/
 }
 
 a {
@@ -81,12 +82,14 @@ li {
     margin-bottom: 30px;
 }
 
-.off{
-   opacity: 0;
+.off {
+    opacity: 0;
 }
-#listEixos .active{
+
+#listEixos .active {
     opacity: 1;
 }
+
 .listEixos h4 {
     margin-top: 15px;
     text-align: left;
@@ -154,49 +157,50 @@ li {
 .containerBox {
     display: flex;
     justify-content: center;
-    align-items:center;
+    align-items: center;
     padding-top: 30px;
 }
-.nameMunicipio{
+
+.nameMunicipio {
     font-size: 27px;
     line-height: 40px;
     font-weight: bold;
     border-bottom: 2px solid #272829;
 }
 
-.municipioTitle{
+.municipioTitle {
     display: flex;
-   
-}
-.seleEixoProg option{
-    font-size: 22px;
-    font-weight: bold;
-    color:#2D3E4F;
 }
 
-.seleEixoProg select{
+.seleEixoProg option {
+    font-size: 22px;
+    font-weight: bold;
+    color: #2D3E4F;
+}
+
+.seleEixoProg select {
     margin-left: 17px;
     width: 270px;
 }
 
 .card-body {
-    
     padding: 0!important;
 }
 
-.cardFooter{
+.cardFooter {
     width: 100%;
     height: 230px;
     background: #2D3E4F;
     border-radius: 5px;
-    border:2px solid rgba(29, 31, 32, 0.133);
+    border: 2px solid rgba(29, 31, 32, 0.133);
 }
 
-.municipioHead img{
+.municipioHead img {
     width: 100px;
     height: 50px;
     color: #2D3E4F;
 }
+
 .municipioDados h3 {
     margin-top: 2%;
     text-align: left;
@@ -205,10 +209,11 @@ li {
     font-weight: 700;
     color: black;
     border-bottom: 3px solid #db4a52;
-    box-shadow: rgba(90, 89, 89, 0.133);;
+    box-shadow: rgba(90, 89, 89, 0.133);
+    ;
 }
 
-.dadosRelatorioPrograma{
+.dadosRelatorioPrograma {
     width: 1006px;
     height: 40vh;
     display: flex;
@@ -220,12 +225,14 @@ li {
     margin-bottom: 2%;
 }
 
-.dadosRelatorioPrograma ul{
+.dadosRelatorioPrograma ul {
     display: flex;
 }
-.TDadosPrograma{
+
+.TDadosPrograma {
     width: 800px;
 }
+
 .TDadosPrograma li {
     text-align: left;
     font-size: 16px;
@@ -234,38 +241,42 @@ li {
     color: rgba(255, 255, 255, 0.73);
     padding: 10px 35px;
 }
-.cardDadosPrograma{
+
+.cardDadosPrograma {
     width: 800px;
     display: flex;
     background: #ffff;
     border-radius: 7px;
     margin-bottom: 1%;
 }
-.cardDadosPrograma li{
+
+.cardDadosPrograma li {
     text-align: left;
     padding: 10px 35px;
     display: flex;
     color: #2D3E4F;
 }
 
-.descricaoPrograma{
+.descricaoPrograma {
     width: 800px;
     padding: 0 10px;
     background: #ffff;
     border-radius: 7px;
 }
 
-.descricaoPrograma h3{
+.descricaoPrograma h3 {
     font-size: 24px;
     font-weight: 500;
 }
 
-.descricaoPrograma p{
+.descricaoPrograma p {
     font-size: 18px;
     text-align: left;
     line-height: 28px;
     font-weight: 500;
 }
+
+
 /*
 
  +++ THIS IS THE IMPORTANT PART +++*/

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!--Arquivos leaflet-->
+    <script src="/js/leaflet.js"></script>
+    <link rel="stylesheet" href="/css/leaflet.css">
+
+    <!--BOOTSTRAP VERSÃO 5-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+    </script>
+
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <title>Document</title>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+        
+        #mapid {
+            border-radius: 5px;
+            width: 500px;
+            height: 410px;
+        }
+        
+        .boxCardMapa {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        
+        .card {
+            width: 330px;
+            height: auto;
+            border: 1px solid red;
+            border-radius: 7px;
+        }
+        
+        .municipioTitle {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 15px 15px;
+        }
+        
+        .municipioTitle h5 {
+            font-size: 25px;
+            line-height: 35px;
+            padding-left: 10px;
+            border-bottom: 2px solid black;
+        }
+        
+        .areaSelects {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 15px 15px;
+        }
+        
+        .areaSelects select {
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+        }
+        
+        .ccardFooter {
+            width: 100%;
+            height: 150px;
+            background-color: black;
+            border-radius: 0 0 5px;
+        }
+        
+        .tituloInfoProg {
+            display: flex;
+            margin-top: 5%;
+            margin-left: 270px;
+        }
+        
+        .areaDadosProjeto {
+            background: black;
+        }
+    </style>
+</head>
+
+<body>
+    <!--HEADER-->
+    <header>
+        <nav style="display: flex;">
+            <ul style="display: flex;">
+                <li>ADMIN</li>
+                <li>ADMIN</li>
+                <li>ADMIN</li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--Duas colunas em uma o card e outra o mapa um ao lado do outro-->
+
+    <section>
+        <div class="boxCardMapa">
+            <div class="card">
+                <!--Primeiro icone e municipio-->
+                <div class="municipioTitle">
+                    <img style="width: 40px;" src="/img/noun_City_481957.svg" alt="">
+                    <h5 class="">São Luis</h5>
+                </div>
+                <!--Segundo os selects-->
+                <div class="areaSelects">
+                    <select name="" id="">
+                        <option value="">Selecione um eixo..</option>
+                    </select>
+                    <select name="" id="">
+                        <option value="">Selecione um programa..</option>
+                    </select>
+                    <select name="" id="">
+                        <option value="">Selecione um projeto..</option>
+                    </select>
+                </div>
+                <!--Terceiro divisor de baixo-->
+                <div class="ccardFooter">
+
+                </div>
+            </div>
+            <div id="mapid"></div>
+        </div>
+
+    </section>
+    <section>
+        <!--Area das info do programa-->
+        <div class="tituloInfoProg">
+            <img style="width: 40px;" src="/img/noun_programming_1214182.svg" alt="">
+            <h2>Informações Sobre o Programa</h2>
+        </div>
+        <!--Area dos dados-->
+        <div class="areaDadosProjeto">
+
+        </div>
+    </section>
+
+    <script src="/mapaInfoMunicipio.js"></script>
+    <script src="/js/index.js"></script>
+
+
+</body>
+
+</html>
