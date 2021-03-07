@@ -22,7 +22,7 @@ let municipioSelecionado = {
 };
 
 const selecionarMunicipio = (municipioId) => {
-    document.querySelector("#botaoSaibaMais").href = `/infoMunicipio.html?municipio=${municipioId}`;
+    document.querySelector("#botaoSaibaMais").href = `/municipioInfo.html?municipio=${municipioId}`;
     qtdProgramasPorMunicipioId(municipioId);
 }
 
@@ -98,7 +98,7 @@ function loadDadosMunicipios() {
 
                 let lista_eixos = ''
                 for (let eixo of eixos) {
-                    lista_eixos += `<p > <a href="infoMunicipio.html?eixo=${eixo.id}&municipio=186"> ${eixo.nome}</a></p>`
+                    lista_eixos += `<p >  ${eixo.nome}</p>`
                 }
                 document.querySelector('#listEixos').innerHTML = lista_eixos
             }

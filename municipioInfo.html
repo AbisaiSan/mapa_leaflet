@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!--Arquivos leaflet-->
+    <script src="/js/leaflet.js"></script>
+    <link rel="stylesheet" href="/css/leaflet.css">
+
+    <!--BOOTSTRAP VERSÃO 5-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+    </script>
+
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <title>Document</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            outline: 0;
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+        
+        body {
+            height: 100vh;
+            font-family: "Source Sans Pro";
+            text-rendering: optimizelegibility;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        body {
+            font-size: 1.6rem;
+        }
+        
+        #mapid {
+            border-radius: 5px;
+            width: 500px;
+            height: 471px;
+        }
+        
+        .bgContainer {
+            width: 90%;
+            max-width: 980px;
+            margin: auto;
+            display: flex;
+        }
+        
+        .boxCardMapa {
+            width: 90%;
+            max-width: 980px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 200px;
+            margin-top: 4%;
+        }
+        
+        .card {
+            width: 420px;
+            height: auto;
+            border: 1px solid #37383a46;
+            border-radius: 7px;
+            box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.192);
+        }
+        
+        .municipioTitle {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 15px 15px;
+        }
+        
+        .municipioTitle h5 {
+            font-size: 25px;
+            line-height: 35px;
+            padding-left: 10px;
+            border-bottom: 2px solid #2d3e4f;
+        }
+        
+        .areaSelects {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 15px 15px;
+        }
+        
+        .areaSelects select {
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+        }
+        
+        .areaSelects select:hover {
+            border-color: #971118;
+        }
+        
+        .ccardFooter {
+            width: 100%;
+            height: 150px;
+            background-color: #2d3e4f;
+            border-radius: 0 0 5px;
+        }
+        
+        .tituloInfoProg {
+            display: flex;
+            margin-top: 5%;
+        }
+        
+        .tituloInfoProg h2 {
+            padding-left: 5px;
+        }
+        
+        .areaDadosProjeto {
+            width: 90%;
+            max-width: 980px;
+        }
+        
+        .bg {
+            background: #2D3E4F;
+            border-radius: 7px;
+            margin-bottom: 2%;
+            padding: 10px 25px;
+        }
+        
+        .tabela ul {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .tabela li {
+            background-color: #ffff;
+            color: #FFFF;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+
+<script>
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const eixoId = urlParams.get('eixo');
+    const municipioId = urlParams.get('municipio');
+
+    const todosOsProjetos = fetch(`http://api.homologacao.promunicipios.ma.gov.br/api/projeto/municipio/${municipioId}`)
+        .then(data => data.json())
+        .then(projetos => projetos);
+
+    const descricaoPrograma = (programaId) => todosOsProjetos
+        .then(projetos => projetos.filter(proj => proj.programa.id == programaId)[0]["programa"]["descricao"]);
+
+    const detalhesProjeto = (projetoId) => todosOsProjetos
+        .then(projetos => projetos.filter(proj => proj.id == projetoId)[0]["detalhes"]);
+
+    const carregarProgramas = (eixoId) => {
+        todosOsProjetos.then(data => {
+            const projetos = data.map(proj => proj.programa).filter(prog => prog.eixo.id == eixoId);
+
+            let programasUnicos = [];
+            projetos.forEach(proj => {
+                if (!programasUnicos.some(prog => prog.id == proj.id)) {
+                    programasUnicos.push(proj);
+                }
+            })
+            programasUnicos.forEach(prog => {
+                const select = document.querySelector("#programaSelect");
+                const option = document.createElement("option");
+                option.value = `${prog.id}`;
+                option.text = `${prog.nome}`;
+                select.appendChild(option);
+            });
+        });
+    };
+
+    const carregarProjetos = (programaId) => {
+        todosOsProjetos.then(data => {
+            const projetos = data.filter(prog => prog.programa.id == programaId);
+
+            let projetosUnicos = [];
+            projetos.forEach(proj => {
+                if (!projetosUnicos.some(prog => prog.id == proj.id)) {
+                    projetosUnicos.push(proj);
+                }
+            })
+            projetosUnicos.forEach(proj => {
+                fetch(`http://api.homologacao.promunicipios.ma.gov.br/api/detalhe/projeto/${proj.id}`)
+                    .then(data => data.json())
+                    .then(detalhe => {
+                        //console.log(detalhe)
+
+                        const descricao = detalhe[0].valor; // ? detalhe.descricao : "(Projeto não identificado)";
+
+                        const select = document.querySelector("#projetoSelect");
+                        const option = document.createElement("option");
+                        option.value = `${proj.id}`;
+                        option.text = `${descricao}`;
+                        select.appendChild(option);
+
+                    })
+            });
+        });
+    };
+
+    const selecionarEixo = (selectElement) => {
+        const selectProgramas = document.querySelector("#programaSelect");
+        let length = selectProgramas.options.length;
+        for (i = length - 1; i >= 1; i--) {
+            selectProgramas.options[i] = null;
+        }
+
+        const eixoSelectionadoId = selectElement.value;
+        carregarProgramas(eixoSelectionadoId);
+    };
+
+    const selecionarPrograma = (selectElement) => {
+        const programaSelectionadoId = selectElement.value;
+
+        const elementoDescricaoPrograma = document.querySelector("#descricaoPrograma");
+        descricaoPrograma(programaSelectionadoId).then(desc => {
+            elementoDescricaoPrograma.innerHTML = `${desc}`;
+        });
+
+        const selectProjetos = document.querySelector("#projetoSelect");
+        let length = selectProjetos.options.length;
+        for (i = length - 1; i >= 1; i--) {
+            selectProjetos.options[i] = null;
+        }
+
+        carregarProjetos(programaSelectionadoId);
+    };
+
+    const selecionarProjeto = (selectElement) => {
+        const projetoSelecionadoId = selectElement.value;
+        detalhesProjeto(projetoSelecionadoId)
+            .then(detalhes => {
+                const nome = detalhes.filter(det => det.coluna == "descricao")[0]["valor"];
+                const beneficiarios = detalhes.filter(det => det.coluna == "beneficiarios")[0]["valor"];
+                const dataInicio = detalhes.filter(det => det.coluna == "data_inicio")[0]["valor"];
+
+                document.querySelector("#nomeProjeto").innerHTML = `${nome}`;
+                document.querySelector("#dataInicio").innerHTML = `${dataInicio}`;
+                document.querySelector("#beneficiados").innerHTML = `${beneficiarios}`;
+            });
+    }
+</script>
+
+
+<body>
+    <!--HEADER-->
+    <header>
+        <nav style="display: flex;">
+            <ul style="display: flex;">
+                <li>ADMIN</li>
+                <li>ADMIN</li>
+                <li>ADMIN</li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--Duas colunas em uma o card e outra o mapa um ao lado do outro-->
+
+    <section class="bgContainer">
+        <div class="boxCardMapa">
+            <div class="card">
+                <!--Primeiro icone e municipio-->
+                <div class="municipioTitle">
+                    <img style="width: 40px;" src="/img/noun_City_481957.svg" alt="">
+                    <h5 id="municipioNome">São Luis</h5>
+                </div>
+                <!--Segundo os selects-->
+                <div class="areaSelects">
+                    <select name="eixo" id="eixoSelect" onchange="selecionarEixo(this)">
+                        <option value="">Selecione um eixo..</option>
+                    </select>
+                    <select name="programa" id="programaSelect" onchange="selecionarPrograma(this)">
+                        <option value="">Selecione um programa..</option>
+                    </select>
+                    <select name="projeto" id="projetoSelect" onchange="selecionarProjeto(this)">
+                        <option value="">Selecione um projeto..</option>
+                    </select>
+                </div>
+                <!--Terceiro divisor de baixo-->
+                <div class="ccardFooter">
+
+                </div>
+            </div>
+            <div id="mapid"></div>
+        </div>
+
+    </section>
+    <section class="bgContainer">
+        <!--Area das info do programa-->
+
+        <!--Area dos dados-->
+        <div class="areaDadosProjeto">
+            <div class="tituloInfoProg">
+                <img style="width: 40px;" src="/img/noun_programming_1214182.svg" alt="">
+                <h2>Informações Sobre o Programa</h2>
+            </div>
+            <div class="bg">
+                <div class="tabela">
+                    <table class="table mb-0">
+                        <thead style="background: #ffff; border-radius: 7px;" class="thead-light">
+                            <tr>
+                                <th class="border-top-0">PROJETO</th>
+                                <th class="border-top-0">DATA DE INÍCIO
+                                </th>
+                                <th class="border-top-0">N° BENEFICIADOS
+                                </th>
+                                <th class="border-top-0">Baixar PDF</th>
+                                <th class="border-top-0">Baixar CSV</th>
+                            </tr>
+                            <!--end tr-->
+                        </thead>
+                        <tbody style="color: #ffff;">
+
+                            <tr>
+                                <td id="nomeProjeto"></td>
+                                <td id="dataInicio"></td>
+                                <td id="beneficiados"></td>
+                                <td title="Clique aqui para baixar PDF"> <i style="font-size: 30px;" class="far fa-file-pdf"></i></td>
+                                <td title="Clique aqui para baixar CSV"> <i style="font-size: 30px;" class="far fa-file-excel"></i></li>
+
+                            </tr>
+                            <!--end tr-->
+
+                            <!--end tr-->
+                        </tbody>
+                    </table>
+                    <!--end table-->
+                    <div style="margin-top: 2%;" class="descricaoPrograma">
+                        <h3>Descrição do programa</h3>
+                        <p id="descricaoPrograma">Escolha um programa para ver a sua descrição.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="/mapaInfoMunicipio.js"></script>
+    <script src="/js/index.js"></script>
+
+    <script>
+        const select = document.querySelector("#eixoSelect");
+        const municipioNome = document.querySelector("#municipioNome");
+
+        fetch('http://api.homologacao.promunicipios.ma.gov.br/api/eixo')
+            .then(data => data.json())
+            .then(eixoList => eixoList.forEach(eixo => {
+                const option = document.createElement("option");
+                option.value = `${eixo.id}`;
+                option.text = `${eixo.nome}`;
+                select.appendChild(option);
+            }))
+            .then(_ => {
+                if (eixoId) select.value = eixoId;
+            })
+
+        fetch(`http://api.homologacao.promunicipios.ma.gov.br/api/municipio/id/${municipioId}`)
+            .then(data => data.json())
+            .then(municipio => {
+                municipioNome.innerHTML = `${municipio.nome}`;
+            });
+
+        carregarProgramas(eixoId);
+    </script>
+
+</body>
+
+</html>
