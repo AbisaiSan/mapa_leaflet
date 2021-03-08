@@ -21,6 +21,7 @@ let municipioSelecionado = {
     "id": ""
 };
 
+/*QUANDO O MUNICIPIO É SELECIONADO AO CLIQUE DO BOTAO LEVA A OUTRA PAGINA*/
 const selecionarMunicipio = (municipioId) => {
     document.querySelector("#botaoSaibaMais").href = `/municipioInfo.html?municipio=${municipioId}`;
     qtdProgramasPorMunicipioId(municipioId);
@@ -185,8 +186,7 @@ function loadDadosMunicipios() {
                                         .then(mId => selecionarMunicipio(mId));
                                 }
 
-                                //adding the province name to the visible div
-                                //addTextoDiv(feature.properties.name);
+                               
 
                             });
                         }
