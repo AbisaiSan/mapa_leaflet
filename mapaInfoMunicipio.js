@@ -44,7 +44,16 @@ fetch(
     const urlParams = new URLSearchParams(queryString);
     const eixoId = urlParams.get('eixo');
     const municipioId = urlParams.get('municipio');
+    
 
+    var nomeMunicipioCsv;
+    var eixoMunicipioCsv;
+    var programaMunicipioCsv;
+    var descProgramaCsv;
+    var nomeProjetoCsv;
+    var dataInicioProgramaCsv;
+    var NbeneficiadosCsv;
+    
     const todosOsProjetos = fetch(`http://api.homologacao.promunicipios.ma.gov.br/api/projeto/municipio/${municipioId}`)
         .then(data => data.json())
         .then(projetos => projetos);
@@ -70,6 +79,7 @@ fetch(
                 const option = document.createElement("option");
                 option.value = `${prog.id}`;
                 option.text = `${prog.nome}`;
+                console.log(option.text)
                 select.appendChild(option);
             });
         });
@@ -96,9 +106,12 @@ fetch(
                         const select = document.querySelector("#projetoSelect");
                         const option = document.createElement("option");
                         option.value = `${proj.id}`;
-                        option.text = `${descricao}`;
+                        nomeProjetoCsv = `${descricao}`;
+                       
+                        option.text = nomeProjetoCsv;
                         select.appendChild(option);
 
+                        //console.log(descProgramaCsv)
                     })
             });
         });
@@ -112,6 +125,7 @@ fetch(
         }
 
         const eixoSelectionadoId = selectElement.value;
+        
         carregarProgramas(eixoSelectionadoId);
     };
 
@@ -121,6 +135,7 @@ fetch(
         const elementoDescricaoPrograma = document.querySelector("#descricaoPrograma");
         descricaoPrograma(programaSelectionadoId).then(desc => {
             elementoDescricaoPrograma.innerHTML = `${desc}`;
+            // console.log(elementoDescricaoPrograma)
         });
 
         const selectProjetos = document.querySelector("#projetoSelect");
@@ -136,17 +151,27 @@ fetch(
         const projetoSelecionadoId = selectElement.value;
         detalhesProjeto(projetoSelecionadoId)
             .then(detalhes => {
+
                 const nome = detalhes.filter(det => det.coluna == "descricao")[0]["valor"];
                 const beneficiarios = detalhes.filter(det => det.coluna == "beneficiarios")[0]["valor"];
                 const dataInicio = detalhes.filter(det => det.coluna == "data_inicio")[0]["valor"];
 
                 document.querySelector("#nomeProjeto").innerHTML = `${nome}`;
-                document.querySelector("#dataInicio").innerHTML = `${dataInicio}`;
-                document.querySelector("#beneficiados").innerHTML = `${beneficiarios}`;
+               
+                dataInicioProgramaCsv = `${dataInicio}`;
+                document.querySelector("#dataInicio").innerHTML = dataInicioProgramaCsv;
+               
+                NbeneficiadosCsv  = `${beneficiarios}`
+                document.querySelector("#beneficiados").innerHTML = NbeneficiadosCsv;
+               
             });
+
+
     }
 
+
     const selectEixo = document.querySelector("#eixoSelect");
+   
         const municipioNome = document.querySelector("#municipioNome");
 
         fetch('http://api.homologacao.promunicipios.ma.gov.br/api/eixo')
@@ -155,16 +180,56 @@ fetch(
                 const option = document.createElement("option");
                 option.value = `${eixo.id}`;
                 option.text = `${eixo.nome}`;
+               
                 selectEixo.appendChild(option);
+               
             }))
             .then(_ => {
                 if (eixoId) selectEixo.value = eixoId;
+               
             })
 
         fetch(`http://api.homologacao.promunicipios.ma.gov.br/api/municipio/id/${municipioId}`)
             .then(data => data.json())
             .then(municipio => {
-                municipioNome.innerHTML = `${municipio.nome}`;
+                nomeMunicipioCsv = `${municipio.nome}`;
+                municipioNome.innerHTML = nomeMunicipioCsv;
+               
             });
 
+        
         carregarProgramas(eixoId);
+        
+
+        var eixoT = document.querySelector("#teste")[document.querySelector("#teste").selectedIndex].innerText;
+        var programaT = document.querySelector("#programaSelect")[document.querySelector("#programaSelect").selectedIndex].innerText;
+
+        console.log(eixoT)
+
+        document.querySelector("#eixoEscolhido").innerText = eixoT;
+        
+        // programaCsv = document.querySelector("#programaEscolhido").innerText;
+        // nomeMunicipio = document.getElementById('municipioNome').innerHTML;
+        
+        function gerarCsv() {
+   
+            var csv = '"Municipio"; Programa; Descrição do Programa; Projeto; Data de inicio do projeto; N° Beneficiados; \n';
+            
+                csv += nomeMunicipioCsv;
+                csv += ';' + 'Nome do programa';
+                csv += ';' + 'desc do Programa';
+                csv += ';' + nomeProjetoCsv;
+                csv += ';' +  dataInicioProgramaCsv;
+                csv += ';' +  NbeneficiadosCsv;
+
+                csv += '\n';
+
+            var universalBOM = "\uFEFF";
+            var hiddenElement = document.createElement('a');
+            hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(universalBOM+csv);
+            hiddenElement.target = '_blank';
+            hiddenElement.download = 'promunicipios.csv';
+            hiddenElement.click();
+        };
+
+       

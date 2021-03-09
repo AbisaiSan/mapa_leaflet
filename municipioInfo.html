@@ -16,6 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
     </script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -26,6 +27,7 @@
 </head>
 
 <body>
+    
     <!--HEADER-->
     <header>
         <nav style="display: flex;">
@@ -45,12 +47,12 @@
                 <!--Primeiro icone e municipio-->
                 <div class="municipioTitle">
                     <img style="width: 40px;" src="/img/noun_City_481957.svg" alt="">
-                    <h5 id="municipioNome">São Luis</h5>
+                    <h5 id="municipioNome"></h5>
                 </div>
                 <!--Segundo os selects-->
                 <div class="areaSelects">
                     <select name="eixo" id="eixoSelect" onchange="selecionarEixo(this)">
-                        <option value="">Selecione um eixo..</option>
+                        <option value="0" >Selecione um eixo..</option>
                     </select>
                     <select name="programa" id="programaSelect" onchange="selecionarPrograma(this)">
                         <option value="">Selecione um programa..</option>
@@ -81,26 +83,16 @@
                 <div class="tabela table-responsive-md">
                     <table class="table mb-0">
                         <thead style="background: #ffff; border-radius: 7px;" class="thead-light">
-                            <tr>
-                                <th class="border-top-0 table-wid">PROJETO</th>
-                                <th class="border-top-0 table-wid">DATA DE INÍCIO
-                                </th>
-                                <th class="border-top-0 table-wid">N° BENEFICIADOS
-                                </th>
-                                <th class="border-top-0 table-wid">Baixar PDF</th>
-                                <th class="border-top-0 table-wid">Baixar CSV</th>
+                            <tr id="testeTr">
+                                <th class="border-top-0 table-wid"></th>
+                               
                             </tr>
                             <!--end tr-->
                         </thead>
                         <tbody style="color: #ffff;">
 
-                            <tr>
-                                <td id="nomeProjeto"></td>
-                                <td id="dataInicio"></td>
-                                <td id="beneficiados"></td>
-                                <td title="Clique aqui para baixar PDF"> <i style="font-size: 30px;" class="far fa-file-pdf"></i></td>
-                                <td title="Clique aqui para baixar CSV"> <i style="font-size: 30px;" class="far fa-file-excel"></i></li>
-
+                            <tr id="teste1">
+                                <td ></td>
                             </tr>
                             <!--end tr-->
 
@@ -119,6 +111,8 @@
 
     <script src="/mapaInfoMunicipio.js"></script>
     <script src="/js/index.js"></script>
+
+    
 </body>
 
 </html>
