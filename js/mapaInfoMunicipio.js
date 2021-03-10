@@ -38,8 +38,6 @@ fetch(
         }).addTo(myMap);
     });
 
-
-
 /*SCRIPTS PARA TRAZERS OS DADOS DO MUNICIPIO*/
 
 const queryString = window.location.search;
@@ -47,35 +45,7 @@ const urlParams = new URLSearchParams(queryString);
 const eixoId = urlParams.get('eixo');
 const municipioId = urlParams.get('municipio');
 
-/*LISTAR TUDO QUE HÁ EM PROGRAMAS*/
-
-async function getL() {
-    try {
-        const response = await fetch(`http://api.homologacao.promunicipios.ma.gov.br/api/projeto/municipio/${municipioId}`)
-        //console.log('ok funcionou')
-        const data = await response.json()
-        show1(data)
-      
-
-    } catch (error) {
-        console.error(error)
-    }
-}
-
-getL()
-
-
-function show1(eixos) {
-
-    let lista_eixos = ''
-    for (let municipio of eixos) {
-
-        lista_eixos += `<option >${municipio.nome}</option>`
-        // console.log(lista_eixos)
-    }
-    // document.querySelector('#selectEixo').innerHTML = lista_eixos
-}
-
+/*VARIAVEIS GLOBAIS*/
 
 var nomeMunicipioCsv;
 var eixoMunicipioCsv;
@@ -131,7 +101,7 @@ const carregarProjetos = (programaId) => {
             fetch(`http://api.homologacao.promunicipios.ma.gov.br/api/detalhe/projeto/${proj.id}`)
                 .then(data => data.json())
                 .then(detalhe => {
-                    //console.log(detalhe)
+                    
 
                     const descricao = detalhe[0].valor; // ? detalhe.descricao : "(Projeto não identificado)";
 
@@ -143,7 +113,7 @@ const carregarProjetos = (programaId) => {
                     option.text = nomeProjetoCsv;
                     select.appendChild(option);
 
-                    //console.log(descProgramaCsv)
+                   
                 })
         });
     });
@@ -158,12 +128,7 @@ const selecionarEixo = (selectElement) => {
 
     const eixoSelectionadoId = selectElement.value;
 
-    
-
     carregarProgramas(eixoSelectionadoId);
-
-    
-    
 };
 
 const selecionarPrograma = (selectElement) => {
@@ -172,7 +137,8 @@ const selecionarPrograma = (selectElement) => {
     const elementoDescricaoPrograma = document.querySelector("#descricaoPrograma");
     descricaoPrograma(programaSelectionadoId).then(desc => {
         elementoDescricaoPrograma.innerHTML = `${desc}`;
-        // console.log(elementoDescricaoPrograma)
+        descProgramaCsv = elementoDescricaoPrograma.innerText;
+        
     });
 
     const selectProjetos = document.querySelector("#projetoSelect");
@@ -192,16 +158,15 @@ const selecionarProjeto = (selectElement) => {
             const detalhesPrograma = detalhes;
 
             var row = '';
-            var valRow ='';
-            var valCol ='';
+            var valRow = '';
+            var valCol = '';
 
-            detalhesPrograma.forEach((valColuna)=>{
-                console.log(valColuna)
-                
+            detalhesPrograma.forEach((valColuna) => {
+
                 /*INTEIRANDO VALOR DA LINHA NA TABELA*/
                 row = valColuna.coluna;
-                var valorColFormatado = row.replace("_", " " );
-                valRow +=`<th style=" text-transform: capitalize;">${valorColFormatado}</th>`
+                var valorColFormatado = row.replace("_", " ");
+                valRow += `<th style=" text-transform: capitalize;">${valorColFormatado}</th>`
 
                 /*INTEIRANDO VALOR DA COLUNA NA TABELA*/
 
@@ -212,32 +177,26 @@ const selecionarProjeto = (selectElement) => {
             valRow += '<th>Baixar PDF</th>';
             valRow += '<th>Baixar CSV</th>';
 
-            valCol += '<td title="Clique aqui para baixar PDF"> <i style="font-size: 30px;" class="far fa-file-pdf"></i></td>'
+            valCol += `<td title="Clique aqui para baixar PDF"><button onclick='downloadPDF()'><i style="font-size: 30px;" class="far fa-file-pdf"></i></button></td>`
             valCol += `<td title="Clique aqui para baixar CSV"><button onclick='gerarCsv()'><i style="font-size: 30px;" class="far fa-file-excel"></i></button></td>`
 
-            document.querySelector('#testeTr').innerHTML = valRow;
-            document.querySelector('#teste1').innerHTML = valCol;
-            
-           
-            // .then(detalhes => {
-            //     const nome = detalhes.filter(det => det.coluna == "descricao")[0]["valor"];
-            //     const beneficiarios = detalhes.filter(det => det.coluna == "beneficiarios")[0]["valor"];
-            //     const dataInicio = detalhes.filter(det => det.coluna == "data_inicio")[0]["valor"];
+            document.querySelector('#valorLinha').innerHTML = valRow;
+            document.querySelector('#valorColuna').innerHTML = valCol;
 
-            //     document.querySelector("#nomeProjeto").innerHTML = `${nome}`;
-
-            //     dataInicioProgramaCsv = `${dataInicio}`;
-            //     document.querySelector("#dataInicio").innerHTML = dataInicioProgramaCsv;
-
-            //     NbeneficiadosCsv = `${beneficiarios}`
-            //     document.querySelector("#beneficiados").innerHTML = NbeneficiadosCsv;
-
-            // });
-
+            /*AQUI EU PEGO OS VALORES DA DATA DE INICIO DO PROJETO E O TOTAL DE BENEFICIADOS
+            //jOGO DENTRO DAS MINHAS VARIAVEIS GLOBAIS*/
+            const beneficiarios = detalhes.filter(det => det.coluna == "beneficiarios")[0]["valor"];
+            const dataInicio = detalhes.filter(det => det.coluna == "data_inicio")[0]["valor"];
+            //Essa variavel recebe o valor e uso ela na função de gerarCsv
+            dataInicioProgramaCsv = `${dataInicio}`;
+            //Essa variavel recebe o valor e uso ela na função de gerarCsv
+            NbeneficiadosCsv = `${beneficiarios}`
+    
         });
 
 }
 
+/*Aqui vai o funcionamento da seleção de eixo e municipio*/
 
 const selectEixo = document.querySelector("#eixoSelect");
 
@@ -252,7 +211,6 @@ fetch('http://api.homologacao.promunicipios.ma.gov.br/api/eixo')
 
         selectEixo.appendChild(option);
 
-       
 
     }))
     .then(_ => {
@@ -268,24 +226,41 @@ fetch(`http://api.homologacao.promunicipios.ma.gov.br/api/municipio/id/${municip
 
     });
 
-
 carregarProgramas(eixoId);
 
-/*PEGAR VALOR DO EIXO*/
-var items = document.getElementById('eixoSelect'); 
-items.addEventListener('change', function(e){
-    if (e.target.id == 'eixoSelect') alert(e.target.value.innerText); 
+
+/*PEGAR VALOR DO EIXO e PROGRAMA PARA USAR NA FUNÇÃO gerarCsv*/
+
+/*Valor do eixo*/
+var select = document.querySelector('#eixoSelect');
+select.addEventListener('change', function () {
+    var option = this.selectedOptions[0];
+    var texto = option.textContent;
+
+    eixoMunicipioCsv = texto;
+    
+});
+
+/*Valor do PROGRAMA*/
+var programaSelecionadoCsv = document.querySelector('#programaSelect');
+programaSelecionadoCsv.addEventListener('change', function () {
+    var optionProg = this.selectedOptions[0];
+    var textoProg = optionProg.textContent;
+
+    programaMunicipioCsv = textoProg;
+   
 });
 
 
-
+/*MINHA FUNÇÃO PARA GERAR O CSV, ELA RECEBE OS VALORES DAS VARIAVEIS QUE DEFINI EM ESCOPO GLOBAL E CARREGA OS DADOS NO DOCUMENTO*/
 function gerarCsv() {
 
-    var csv = '"Municipio"; Programa; Descrição do Programa; Projeto; Data de inicio do projeto; N° Beneficiados; \n';
+    var csv = '"Municipio"; Eixo; Programa; Descrição do Programa; Projeto; Data de inicio do projeto; N° Beneficiados; \n';
 
     csv += nomeMunicipioCsv;
-    csv += ';' + 'Nome do programa';
-    csv += ';' + 'desc do Programa';
+    csv += ';' + eixoMunicipioCsv;
+    csv += ';' + programaMunicipioCsv;
+    csv += ';' + descProgramaCsv;
     csv += ';' + nomeProjetoCsv;
     csv += ';' + dataInicioProgramaCsv;
     csv += ';' + NbeneficiadosCsv;
