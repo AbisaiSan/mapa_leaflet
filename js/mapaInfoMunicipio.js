@@ -108,7 +108,7 @@ const carregarProjetos = (programaId) => {
                     const select = document.querySelector("#projetoSelect");
                     const option = document.createElement("option");
                     option.value = `${proj.id}`;
-                    nomeProjetoCsv = `${descricao}`;
+                    nomeProjetoCsv = `${descricao}`;   
 
                     option.text = nomeProjetoCsv;
                     select.appendChild(option);
@@ -177,7 +177,7 @@ const selecionarProjeto = (selectElement) => {
             valRow += '<th>Baixar PDF</th>';
             valRow += '<th>Baixar CSV</th>';
 
-            valCol += `<td title="Clique aqui para baixar PDF"><button onclick='downloadPDF()'><i style="font-size: 30px;" class="far fa-file-pdf"></i></button></td>`
+            valCol += `<td title="Clique aqui para baixar PDF"><button onclick='CriaPDF()'><i style="font-size: 30px;" class="far fa-file-pdf"></i></button></td>`
             valCol += `<td title="Clique aqui para baixar CSV"><button onclick='gerarCsv()'><i style="font-size: 30px;" class="far fa-file-excel"></i></button></td>`
 
             document.querySelector('#valorLinha').innerHTML = valRow;
@@ -275,3 +275,24 @@ function gerarCsv() {
     hiddenElement.click();
 };
 
+/*FUNÇÃO PARA O DONWLOAD DOS DADOS COMO PDF*/
+
+function CriaPDF() {
+    var minhaTabela = document.getElementById('conteudoPdf').innerHTML;
+    var style = "<style>";
+    style = style + "table {width: 100%;font: 20px Calibri;}";
+    style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+    style = style + "padding: 2px 3px;text-align: center;}";
+    style = style + "</style>";
+    // CRIA UM OBJETO WINDOW
+    var win = window.open('', '', 'height=700,width=700');
+    win.document.write('<html><head>');
+    win.document.write('<title>Promunicipios</title>');   // <title> CABEÇALHO DO PDF.
+    win.document.write(style);  // INCLUI UM ESTILO NA TAB HEAD
+    win.document.write('</head>');
+    win.document.write('<body>');
+    win.document.write(minhaTabela); // O CONTEUDO DA TABELA DENTRO DA TAG BODY
+    win.document.write('</body></html>');
+    win.document.close(); 	// FECHA A JANELA
+    win.print(); // IMPRIME O CONTEUDO
+}
